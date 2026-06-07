@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Girish Mallapragada — Professor of Marketing, Kelley School of Business</title>
+<meta name="description" content="Girish Mallapragada, Professor of Marketing and PetSmart, Inc. Distinguished Professor at the Kelley School of Business, Indiana University. Research on innovation, social media, networks, and marketing strategy." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --crimson:#990000;
+    --crimson-dark:#7a0000;
+    --cream:#EDEBE4;
+    --ink:#1c1c1e;
+    --muted:#5c5c63;
+    --line:#e4e1d8;
+    --bg:#ffffff;
+    --sidebar-bg:#7a0000;
+    --sidebar-grad:linear-gradient(180deg,#990000 0%,#6f0000 100%);
+    --max:880px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--crimson);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  /* ===== Layout ===== */
+  .layout{display:flex;min-height:100vh;}
+  .sidebar{
+    width:290px;
+    flex:0 0 290px;
+    background:var(--sidebar-grad);
+    color:#fff;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding:34px 26px 24px;
+    overflow-y:auto;
+  }
+  .content{
+    flex:1;
+    min-width:0;
+    padding:0;
+  }
+
+  /* ===== Sidebar identity ===== */
+  .id-photo{
+    width:128px;height:128px;border-radius:50%;
+    object-fit:cover;object-position:center top;
+    border:3px solid rgba(255,255,255,.85);
+    box-shadow:0 6px 20px rgba(0,0,0,.28);
+    margin:0 auto 18px;display:block;background:#5e0000;
+  }
+  .id-name{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-weight:700;font-size:1.5rem;line-height:1.2;
+    text-align:center;margin:0 0 6px;letter-spacing:.2px;
+  }
+  .id-role{
+    text-align:center;font-size:.82rem;color:rgba(255,255,255,.88);
+    margin:0 0 4px;font-weight:500;
+  }
+  .id-role.sub{font-size:.76rem;color:rgba(255,255,255,.72);margin-bottom:18px;}
+
+  /* ===== Nav ===== */
+  nav.main-nav{margin-top:8px;display:flex;flex-direction:column;gap:2px;}
+  nav.main-nav a{
+    color:rgba(255,255,255,.92);
+    font-size:.95rem;font-weight:500;
+    padding:11px 14px;border-radius:8px;
+    display:flex;align-items:center;gap:11px;
+    text-decoration:none;transition:background .15s,transform .15s;
+  }
+  nav.main-nav a:hover{background:rgba(255,255,255,.12);text-decoration:none;}
+  nav.main-nav a.active{background:rgba(255,255,255,.18);font-weight:600;}
+  nav.main-nav a svg{width:17px;height:17px;flex:0 0 17px;opacity:.92;}
+
+  .sidebar-footer{
+    margin-top:auto;padding-top:22px;
+    font-size:.72rem;color:rgba(255,255,255,.6);
+    border-top:1px solid rgba(255,255,255,.18);
+    line-height:1.5;
+  }
+  .sidebar-footer a{color:rgba(255,255,255,.82);}
+
+  /* ===== Logo lockups ===== */
+  .logo-row{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;}
+  .iu-lockup{display:flex;align-items:center;gap:12px;}
+  .iu-trident{width:auto;height:54px;display:block;}
+  .iu-words{font-family:'Source Serif 4',Georgia,serif;line-height:1.05;}
+  .iu-words .l1{font-size:1.18rem;font-weight:700;color:var(--crimson);letter-spacing:.3px;}
+  .iu-words .l2{font-size:.74rem;font-weight:600;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;}
+  .logo-divider{width:1px;height:46px;background:var(--line);}
+  .kelley-lockup{font-family:'Source Serif 4',Georgia,serif;line-height:1.1;}
+  .kelley-lockup .k1{font-size:1.18rem;font-weight:700;color:var(--crimson);letter-spacing:.3px;}
+  .kelley-lockup .k2{font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+
+  /* ===== Sections / pages ===== */
+  .page{display:none;animation:fade .35s ease;}
+  .page.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  .inner{max-width:var(--max);margin:0 auto;padding:56px 48px 80px;}
+
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;
+    font-weight:700;color:var(--crimson);margin:0 0 10px;
+  }
+  h1.page-title{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:2.35rem;font-weight:700;line-height:1.1;margin:0 0 8px;color:var(--ink);
+  }
+  h2.sec{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-size:1.5rem;font-weight:700;margin:46px 0 16px;color:var(--ink);
+    padding-bottom:8px;border-bottom:2px solid var(--line);
+  }
+  h3.sub{font-size:1.05rem;font-weight:700;margin:28px 0 10px;color:var(--crimson-dark);}
+  p{margin:0 0 16px;}
+  .lead{font-size:1.12rem;color:#3a3a40;}
+
+  /* ===== Home hero ===== */
+  .hero-logos{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 28px;
+    margin:0 0 36px;
+  }
+  .hero-tag{text-align:center;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:600;}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px;}
+  .pill{
+    background:var(--cream);color:var(--crimson-dark);
+    border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;font-size:.82rem;font-weight:600;
+  }
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0 8px;}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 16px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.03);}
+  .stat .n{font-family:'Source Serif 4',serif;font-size:1.9rem;font-weight:700;color:var(--crimson);line-height:1;}
+  .stat .l{font-size:.76rem;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.06em;}
+
+  /* ===== Publications ===== */
+  ol.pubs{list-style:none;counter-reset:p;padding:0;margin:0;}
+  ol.pubs li{
+    counter-increment:p;position:relative;
+    padding:16px 0 16px 44px;border-bottom:1px solid var(--line);
+  }
+  ol.pubs li::before{
+    content:counter(p);position:absolute;left:0;top:16px;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--cream);color:var(--crimson);
+    font-size:.8rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);
+  }
+  ol.pubs .ptitle{font-weight:600;color:var(--ink);}
+  ol.pubs .pvenue{color:var(--crimson-dark);font-style:italic;}
+  ol.pubs .pmeta{color:var(--muted);font-size:.92rem;}
+  .badge{
+    display:inline-block;background:#fff3cd;color:#7a5b00;
+    border:1px solid #f0e0a8;border-radius:5px;
+    font-size:.72rem;font-weight:600;padding:1px 7px;margin-left:6px;vertical-align:middle;
+  }
+
+  /* ===== Cards / teaching ===== */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:18px 0;}
+  .card{border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:transform .15s,box-shadow .15s;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(153,0,0,.08);}
+  .card h4{margin:0 0 6px;font-size:1rem;color:var(--ink);}
+  .card .lvl{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--crimson);font-weight:700;margin-bottom:8px;}
+  .card p{font-size:.88rem;color:var(--muted);margin:0;}
+
+  /* ===== Vita / lists ===== */
+  .vita-block{margin-bottom:8px;}
+  .timeline{list-style:none;padding:0;margin:0;}
+  .timeline li{padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:18px;}
+  .timeline .yr{flex:0 0 110px;color:var(--crimson);font-weight:700;font-size:.9rem;}
+  .timeline .desc{flex:1;}
+  .timeline .desc strong{display:block;color:var(--ink);}
+  .timeline .desc span{color:var(--muted);font-size:.92rem;}
+
+  ul.clean{list-style:none;padding:0;margin:8px 0 0;}
+  ul.clean li{padding:9px 0 9px 22px;border-bottom:1px solid var(--line);position:relative;font-size:.95rem;}
+  ul.clean li::before{content:"▸";position:absolute;left:0;color:var(--crimson);}
+
+  .download-btn{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--crimson);color:#fff;font-weight:600;
+    padding:12px 22px;border-radius:9px;font-size:.95rem;
+    box-shadow:0 4px 12px rgba(153,0,0,.22);transition:background .15s,transform .15s;
+  }
+  .download-btn:hover{background:var(--crimson-dark);text-decoration:none;transform:translateY(-1px);}
+  .download-btn svg{width:17px;height:17px;}
+
+  /* ===== GitHub ===== */
+  .gh-note{background:var(--cream);border:1px solid var(--line);border-left:4px solid var(--crimson);border-radius:8px;padding:16px 20px;font-size:.9rem;color:var(--muted);margin:8px 0 26px;}
+  .repo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+  .repo{display:block;border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff;transition:transform .15s,box-shadow .15s,border-color .15s;color:inherit;text-decoration:none;}
+  .repo:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.07);border-color:var(--crimson);text-decoration:none;}
+  .repo .rh strong{color:var(--crimson-dark);}
+  .repo .rh{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+  .repo .rh svg{width:20px;height:20px;color:var(--ink);}
+  .repo .rh strong{font-size:1rem;}
+  .repo p{font-size:.88rem;color:var(--muted);margin:0 0 14px;}
+  .repo .tags{display:flex;gap:6px;flex-wrap:wrap;}
+  .repo .tags span{font-size:.72rem;background:var(--cream);border:1px solid var(--line);border-radius:5px;padding:2px 8px;color:var(--crimson-dark);font-weight:600;}
+  .repo .placeholder{color:#aa9;font-style:italic;}
+  .gh-empty{
+    border:1px solid var(--line);border-radius:14px;background:var(--cream);
+    padding:54px 30px;text-align:center;margin-top:10px;
+  }
+  .gh-empty svg{width:44px;height:44px;color:var(--crimson);opacity:.85;margin-bottom:14px;}
+  .gh-empty h3{font-family:'Source Serif 4',Georgia,serif;font-size:1.25rem;font-weight:700;margin:0 0 8px;color:var(--ink);}
+  .gh-empty p{margin:0;color:var(--muted);font-size:.95rem;}
+
+  /* ===== Contact ===== */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;}
+  .contact-card{border:1px solid var(--line);border-radius:12px;padding:22px;background:#fff;}
+  .contact-card .ic{width:34px;height:34px;border-radius:8px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+  .contact-card .ic svg{width:18px;height:18px;color:var(--crimson);}
+  .contact-card .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;}
+  .contact-card .val{font-size:1rem;color:var(--ink);margin-top:3px;}
+
+  /* ===== Mobile ===== */
+  .mobile-bar{display:none;}
+  @media (max-width:860px){
+    .layout{flex-direction:column;}
+    .sidebar{position:static;width:100%;height:auto;flex:none;padding:24px 20px;}
+    .id-photo{width:96px;height:96px;}
+    nav.main-nav{flex-direction:row;flex-wrap:wrap;justify-content:center;}
+    nav.main-nav a{padding:9px 12px;}
+    .sidebar-footer{display:none;}
+    .inner{padding:36px 22px 60px;}
+    h1.page-title{font-size:1.9rem;}
+    .stat-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .timeline li{flex-direction:column;gap:4px;}
+    .timeline .yr{flex:none;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+    <img class="id-photo" src="https://kelley.iu.edu/images/vitae/gmallapr-768.jpg" alt="Girish Mallapragada"
+      onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22128%22 height=%22128%22&gt;&lt;rect width=%22128%22 height=%22128%22 fill=%22%235e0000%22/&gt;&lt;text x=%2264%22 y=%2280%22 font-size=%2256%22 fill=%22%23fff%22 text-anchor=%22middle%22 font-family=%22serif%22&gt;GM&lt;/text&gt;&lt;/svg&gt;';" />
+    <h2 class="id-name">Girish Mallapragada</h2>
+    <p class="id-role">Professor of Marketing</p>
+    <p class="id-role sub">PetSmart, Inc. Distinguished Professor · Kelley School of Business</p>
+
+    <nav class="main-nav" id="nav">
+      <a href="#home" data-page="home" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home
+      </a>
+      <a href="#research" data-page="research">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Research
+      </a>
+      <a href="#teaching" data-page="teaching">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg>Teaching
+      </a>
+      <a href="#vita" data-page="vita">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v15a0 0 0 0 1 0 0H6a0 0 0 0 1 0 0z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>Vita
+      </a>
+      <a href="#github" data-page="github">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.5v-1.8c-2.92.63-3.54-1.4-3.54-1.4-.48-1.21-1.17-1.53-1.17-1.53-.95-.65.07-.64.07-.64 1.06.07 1.61 1.08 1.61 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.33-.27-4.78-1.17-4.78-5.18 0-1.15.41-2.08 1.08-2.82-.11-.27-.47-1.34.1-2.79 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.57 1.45.21 2.52.1 2.79.67.74 1.07 1.67 1.07 2.82 0 4.02-2.45 4.9-4.79 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.73.5A10.5 10.5 0 0 0 12 1.5z"/></svg>Github Projects
+      </a>
+      <a href="#contact" data-page="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg>Contact
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      Kelley School of Business<br/>
+      Indiana University, Bloomington<br/>
+      <a href="https://kelley.iu.edu/faculty-research/faculty-directory/profile.html?id=gmallapr" target="_blank" rel="noopener">Official IU profile ↗</a>
+    </div>
+  </aside>
+
+  <!-- ================= CONTENT ================= -->
+  <main class="content">
+
+    <!-- ===== HOME ===== -->
+    <section class="page active" id="page-home">
+      <div class="inner">
+        <div class="hero-logos">
+          <div class="hero-tag">Indiana University · Kelley School of Business</div>
+          <div class="logo-row">
+            <!-- IU trident lockup -->
+            <div class="iu-lockup">
+              <svg class="iu-trident" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 34" aria-label="Indiana University trident" role="img">
+                <path fill="#990000" d="M-3.34344e-05 4.70897H8.83308V7.174H7.1897V21.1426H10.6134V2.72321H8.83308V0.121224H18.214V2.65476H16.2283V21.1426H19.7889V7.174H18.214V4.64047H27.0471V7.174H25.0614V23.6761L21.7746 26.8944H16.2967V30.455H18.214V33.8787H8.76463V30.592H10.6819V26.8259H5.20403L1.91726 23.6077V7.174H-3.34344e-05V4.70897Z"/>
+              </svg>
+              <div class="iu-words">
+                <div class="l1">INDIANA</div>
+                <div class="l2">University</div>
+              </div>
+            </div>
+            <div class="logo-divider"></div>
+            <!-- Kelley wordmark -->
+            <div class="kelley-lockup">
+              <div class="k1">KELLEY</div>
+              <div class="k2">School of Business</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="eyebrow">Professor of Marketing</p>
+        <h1 class="page-title">Girish Mallapragada</h1>
+        <p class="lead">PetSmart, Inc. Distinguished Professor in Marketing and Chair of the Kelley Undergraduate Honors Program at the Kelley School of Business, Indiana University. My research examines how innovation, social media, networks, and inter-firm relationships shape marketing strategy and firm performance.</p>
+
+        <p>My work brings digital-trace data, network analysis, and modern econometrics to substantive questions in marketing strategy — from open-source and crowdfunding communities to political communication, salesperson networks, and firm governance. It has appeared in the <em>Journal of Marketing</em>, <em>Marketing Science</em>, <em>Journal of Marketing Research</em>, <em>Management Science</em>, and the <em>Journal of the Academy of Marketing Science</em>.</p>
+
+        <div class="pill-row">
+          <span class="pill">Innovation</span>
+          <span class="pill">Social Media</span>
+          <span class="pill">Networks</span>
+          <span class="pill">Marketing Channels</span>
+          <span class="pill">Marketing Strategy</span>
+          <span class="pill">NLP &amp; Text Analysis</span>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat"><div class="n">17+</div><div class="l">Journal Articles</div></div>
+          <div class="stat"><div class="n">1,600+</div><div class="l">Google Scholar Citations</div></div>
+          <div class="stat"><div class="n">h-13</div><div class="l">Google Scholar h-index</div></div>
+        </div>
+
+        <h2 class="sec">Editorial &amp; Academic Leadership</h2>
+        <p>Associate Editor at the <em>Journal of Marketing Research</em> and the <em>Journal of Marketing</em>, and recently Data Editor at the <em>Journal of Marketing</em>. I serve on several editorial review boards and am active in the American Marketing Association's Academic Council and the Marketing Strategy SIG.</p>
+
+        <p style="margin-top:26px;">
+          <a class="download-btn" href="https://apps.kelley.iu.edu/SystemsAPI/vitae/profilecv?username=GMALLAPR" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download full CV (PDF)
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== RESEARCH ===== -->
+    <section class="page" id="page-research">
+      <div class="inner">
+        <p class="eyebrow">Scholarship</p>
+        <h1 class="page-title">Research</h1>
+        <p class="lead">I study innovation, social media, marketing channels, and marketing strategy — often using network structure, digital-trace data, and text as a window into how firms and communities create and capture value.</p>
+
+        <h3 class="sub">Research interests</h3>
+        <div class="pill-row">
+          <span class="pill">Open &amp; user innovation</span>
+          <span class="pill">Social &amp; network structure</span>
+          <span class="pill">Crowdfunding</span>
+          <span class="pill">Political communication &amp; text</span>
+          <span class="pill">Inter-firm relationships &amp; governance</span>
+          <span class="pill">Salesperson networks</span>
+          <span class="pill">New product development</span>
+        </div>
+
+        <h2 class="sec">Selected &amp; Recent Publications</h2>
+        <ol class="pubs">
+          <li><span class="ptitle">Dynamics of New Product Announcements and IPO Performance.</span> Mah, S., Slotegraaf, R., &amp; Mallapragada, G. <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">forthcoming.</span></li>
+          <li><span class="ptitle">To Acquire or To Ally? The Impact of Strategic Emphasis on Governance Mode Choice.</span> Mallapragada, G., Bommaraju, R., Kumar, A., &amp; Pedada, K. (2025). <span class="pvenue">Journal of Marketing Research</span>, <span class="pmeta">62(4), 645–663.</span></li>
+          <li><span class="ptitle">Navigating Geopolitical Turmoil: Corporate Responses to the Ukraine War and Its Impact on Consumer Mindset.</span> Ganesan, S. &amp; Mallapragada, G. (2024). <span class="pvenue">Journal of Public Policy &amp; Marketing</span>, <span class="pmeta">44(1), 122–139.</span></li>
+          <li><span class="ptitle">Navigating Open Innovation.</span> Slotegraaf, R. &amp; Mallapragada, G. (2023). <span class="pvenue">PDMA Handbook of New Product Development</span>, <span class="pmeta">4th ed., 299–314.</span></li>
+          <li><span class="ptitle">Does Connectivity Among Backers Help or Hurt Crowdfunding Success of New Ideas?</span> Herd, K., Mallapragada, G., &amp; Narayan, V. (2022). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">86(5), 117–134.</span></li>
+          <li><span class="ptitle">The Impact of Social Capital and Transaction Efficacy on Salesperson Performance.</span> Mallapragada, G., Gupta, A., &amp; Josephson, B. (2022). <span class="pvenue">Production and Operations Management</span>, <span class="pmeta">31(9), 3525–3542.</span></li>
+          <li><span class="ptitle">Interfirm Collaboration and Exchange Relationships: A Research Agenda for Future Research.</span> Borah, S., Mallapragada, G., Bommaraju, R., Venkatesan, R., &amp; Thongpapanl, T. (2022). <span class="pvenue">International Journal of Research in Marketing</span>, <span class="pmeta">39(2), 603–618.</span></li>
+          <li><span class="ptitle">Impact of Political Television Advertisements on Viewers' Response to Subsequent Advertisements.</span> Fossen, B., Mallapragada, G., &amp; De, A. (2021). <span class="pvenue">Marketing Science</span>, <span class="pmeta">40(2), 305–324.</span></li>
+          <li><span class="ptitle">Board Interlocks and New Product Introductions.</span> Srinivasan, R., Wuyts, S., &amp; Mallapragada, G. (2018). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">82(1), 132–148.</span></li>
+          <li><span class="ptitle">Innovativeness as an Unintended Outcome of Franchising: Insights from Restaurant Chains.</span> Mallapragada, G. &amp; Srinivasan, R. (2017). <span class="pvenue">Decision Sciences</span>, <span class="pmeta">48(6), 1164–1197.</span></li>
+          <li><span class="ptitle">Exploring the Effects of What (Product) and Where (Website) Characteristics on Online Shopping Behavior.</span> Mallapragada, G., Chandukala, S., &amp; Liu, Q. (2016). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">80(2), 21–38.</span></li>
+          <li><span class="ptitle">Peer Review and Research Impact.</span> Mallapragada, G., Lahiri, N., &amp; Nerkar, A. (2016). <span class="pvenue">Customer Needs and Solutions</span>, <span class="pmeta">3(1), 29–41.</span></li>
+          <li><span class="ptitle">Virtual Interfirm Relationships: Examining Heterogeneity in the Effects of Dependence Structures on Relational Outcomes.</span> Mallapragada, G., Grewal, R., Mehta, R., &amp; Dharwadkar, R. (2015). <span class="pvenue">Journal of the Academy of Marketing Science</span>, <span class="pmeta">43(5), 610–628.</span><span class="badge">Best Paper Finalist</span></li>
+          <li><span class="ptitle">Efficacy of Channel Control Mechanisms in Foreign Markets.</span> Grewal, R., Kumar, A., Mallapragada, G., &amp; Saini, A. (2013). <span class="pvenue">Journal of Marketing Research</span>, <span class="pmeta">50(3), 378–398.</span></li>
+          <li><span class="ptitle">Environments, Unobserved Heterogeneity, and the Effect of Market Orientation on Outcomes for High-Tech Firms.</span> Grewal, R., Chandrashekaran, M., Johnson, J. L., &amp; Mallapragada, G. (2013). <span class="pvenue">Journal of the Academy of Marketing Science</span>, <span class="pmeta">41(2), 206–233.</span></li>
+          <li><span class="ptitle">User-Generated Open Source Products: Founder's Social Capital and Time-to-Market.</span> Mallapragada, G., Grewal, R., &amp; Lilien, G. (2012). <span class="pvenue">Marketing Science</span>, <span class="pmeta">31(3), 474–492.</span></li>
+          <li><span class="ptitle">Location, Location, Location: How Network Embeddedness Affects Project Success in Open Source Systems.</span> Grewal, R., Lilien, G., &amp; Mallapragada, G. (2006). <span class="pvenue">Management Science</span>, <span class="pmeta">52(7), 1043–1056.</span></li>
+        </ol>
+
+        <h2 class="sec">Working Papers &amp; Active Projects</h2>
+        <p>Current projects include field-experimental work on sales contests for new products (evidence from India) and a stream on moral language and identity in political communication using U.S. Senators' tweets. Please email if you would like details on manuscripts in review.</p>
+
+        <p style="margin-top:20px;"><a href="https://scholar.google.com/citations?user=QbqzVxUAAAAJ&amp;hl=en" target="_blank" rel="noopener">View full publication list on Google Scholar ↗</a></p>
+      </div>
+    </section>
+
+    <!-- ===== TEACHING ===== -->
+    <section class="page" id="page-teaching">
+      <div class="inner">
+        <p class="eyebrow">In the classroom</p>
+        <h1 class="page-title">Teaching</h1>
+        <p class="lead">I teach across the PhD, MBA, and undergraduate programs at Kelley, with an emphasis on marketing strategy, marketing of technology, and research design and methods. I chair the Kelley Undergraduate Honors Program.</p>
+
+        <h2 class="sec">PhD Seminars</h2>
+        <div class="card-grid">
+          <div class="card"><div class="lvl">Doctoral</div><h4>Seminar on Research Design</h4><p>School-wide course on framing, identification, and the craft of empirical research.</p></div>
+          <div class="card"><div class="lvl">Doctoral</div><h4>Seminar on Marketing Strategy</h4><p>Theory and empirics at the marketing–strategy interface.</p></div>
+          <div class="card"><div class="lvl">Doctoral</div><h4>Research Methods in Marketing</h4><p>Methods seminar spanning econometrics, networks, and text.</p></div>
+        </div>
+
+        <h2 class="sec">MBA &amp; Executive</h2>
+        <div class="card-grid">
+          <div class="card"><div class="lvl">Online MBA</div><h4>Integrated Marketing Management</h4><p>Kelley Direct Online MBA marketing core.</p></div>
+          <div class="card"><div class="lvl">Full-Time MBA</div><h4>Marketing Management</h4><p>Core marketing strategy for MBAs.</p></div>
+          <div class="card"><div class="lvl">Full-Time MBA</div><h4>Marketing of Technology</h4><p>Strategy for innovation- and platform-driven markets.</p></div>
+          <div class="card"><div class="lvl">Full-Time MBA</div><h4>Marketing Intelligence Management</h4><p>Data and analytics for marketing decisions.</p></div>
+          <div class="card"><div class="lvl">EMBA</div><h4>Marketing Strategy</h4><p>SKKU–Indiana University Executive MBA.</p></div>
+          <div class="card"><div class="lvl">MBA</div><h4>Pricing</h4><p>Taught at UNC Kenan-Flagler.</p></div>
+        </div>
+
+        <h2 class="sec">Undergraduate</h2>
+        <div class="card-grid">
+          <div class="card"><div class="lvl">Undergraduate</div><h4>Marketing Strategy</h4><p>Capstone strategy course at Kelley.</p></div>
+          <div class="card"><div class="lvl">Undergraduate</div><h4>Brand &amp; Product Management</h4><p>Building and managing brands and product lines.</p></div>
+          <div class="card"><div class="lvl">Undergraduate</div><h4>B2B Marketing</h4><p>Business-to-business marketing and channels.</p></div>
+        </div>
+
+        <h2 class="sec">Teaching Recognition</h2>
+        <ul class="clean">
+          <li>Finalist, Faculty Exceptional Inspiration &amp; Guidance Award — Kelley Doctoral Student Association (multiple years)</li>
+          <li>Finalist, Sauvain Undergraduate Teaching Award, Indiana University (2016, 2017)</li>
+          <li>Nominated, Trustees Teaching Award, Indiana University (2015)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== VITA ===== -->
+    <section class="page" id="page-vita">
+      <div class="inner">
+        <p class="eyebrow">Curriculum Vitae</p>
+        <h1 class="page-title">Vita</h1>
+        <p class="lead">An overview of appointments, education, honors, and service. The complete, current CV is available as a PDF.</p>
+
+        <p style="margin:6px 0 10px;">
+          <a class="download-btn" href="https://apps.kelley.iu.edu/SystemsAPI/vitae/profilecv?username=GMALLAPR" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download full CV (PDF)
+          </a>
+        </p>
+
+        <h2 class="sec">Academic Appointments</h2>
+        <ul class="timeline">
+          <li><span class="yr">2025–present</span><span class="desc"><strong>Professor of Marketing; PetSmart, Inc. Distinguished Professor Chair</strong><span>Kelley School of Business, Indiana University</span></span></li>
+          <li><span class="yr">2018–2025</span><span class="desc"><strong>Associate Professor of Marketing</strong><span>Weimer Faculty Fellow (2020–2025); Eli Lilly Faculty Fellow (2018–2020) · Indiana University</span></span></li>
+          <li><span class="yr">2011–2018</span><span class="desc"><strong>Assistant Professor of Marketing</strong><span>3M Faculty Fellow (2015–2017) · Indiana University</span></span></li>
+          <li><span class="yr">2007–2011</span><span class="desc"><strong>Assistant Professor of Marketing</strong><span>Kenan-Flagler Business School, University of North Carolina at Chapel Hill</span></span></li>
+        </ul>
+
+        <h2 class="sec">Education</h2>
+        <ul class="timeline">
+          <li><span class="yr">2008</span><span class="desc"><strong>Ph.D., Business Administration</strong><span>Smeal College of Business, The Pennsylvania State University</span></span></li>
+          <li><span class="yr">2001</span><span class="desc"><strong>MBA, Marketing &amp; Information Technology</strong><span>Indian Institute of Management, Lucknow</span></span></li>
+          <li><span class="yr">1995</span><span class="desc"><strong>B.E., Mechanical Engineering</strong><span>Osmania University, Hyderabad</span></span></li>
+        </ul>
+
+        <h2 class="sec">Editorial Service</h2>
+        <ul class="clean">
+          <li>Associate Editor — <em>Journal of Marketing Research</em> (2022–present)</li>
+          <li>Associate Editor — <em>Journal of Marketing</em> (2023–present)</li>
+          <li>Data Editor — <em>Journal of Marketing</em> (2024–2025)</li>
+          <li>Editorial Review Board — <em>Marketing Science</em>, <em>JAMS</em>, <em>Customer Needs and Solutions</em>, and others</li>
+          <li>American Marketing Association — Academic Council; Chair, Marketing Strategy SIG</li>
+        </ul>
+
+        <h2 class="sec">Selected Honors &amp; Awards</h2>
+        <ul class="clean">
+          <li>Weimer Faculty Fellowship, Indiana University (2020–present)</li>
+          <li>Eli Lilly and Company Faculty Fellowship, Indiana University (2019–2020)</li>
+          <li>3M Faculty Fellowship, Indiana University (2015–2017)</li>
+          <li>JM Outstanding Reviewer Award, American Marketing Association (2022)</li>
+          <li>Best Paper Finalist, <em>Journal of the Academy of Marketing Science</em> (2015)</li>
+          <li>Smeal Doctoral Dissertation Award, Penn State University (2006)</li>
+          <li>ISBM Doctoral Dissertation Award, Penn State University (2005)</li>
+        </ul>
+
+        <h2 class="sec">Programming &amp; Methods</h2>
+        <div class="pill-row">
+          <span class="pill">R</span><span class="pill">Python</span><span class="pill">Stata</span>
+          <span class="pill">SAS</span><span class="pill">SQL</span><span class="pill">WinBUGS</span><span class="pill">Mplus</span>
+        </div>
+
+        <h2 class="sec">PhD Students Supervised (Chair / Committee)</h2>
+        <ul class="clean">
+          <li>Anwesha De — <em>chair</em>; placed at Bocconi University (now University of Nebraska–Lincoln)</li>
+          <li>Suyun Mah — Singapore Management University</li>
+          <li>Dongwook Chae — Virginia Commonwealth University</li>
+          <li>Wenqian Ni — Colorado State University (post-doc)</li>
+          <li>Yoonju Han — Lehigh University · Shekhar Misra — Grenoble École de Management</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== GITHUB ===== -->
+    <section class="page" id="page-github">
+      <div class="inner">
+        <p class="eyebrow">Code &amp; Data</p>
+        <h1 class="page-title">Github Projects</h1>
+        <p class="lead">Replication packages, data-collection tools, and analysis code accompanying my research in networks, text analysis, and marketing strategy.</p>
+
+        <p style="margin-bottom:24px;">
+          <a class="download-btn" href="https://github.com/girishm77" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.5v-1.8c-2.92.63-3.54-1.4-3.54-1.4-.48-1.21-1.17-1.53-1.17-1.53-.95-.65.07-.64.07-.64 1.06.07 1.61 1.08 1.61 1.08.94 1.6 2.46 1.14 3.06.87.1-.68.37-1.14.67-1.4-2.33-.27-4.78-1.17-4.78-5.18 0-1.15.41-2.08 1.08-2.82-.11-.27-.47-1.34.1-2.79 0 0 .88-.28 2.88 1.07a10 10 0 0 1 5.24 0c2-1.35 2.88-1.07 2.88-1.07.57 1.45.21 2.52.1 2.79.67.74 1.07 1.67 1.07 2.82 0 4.02-2.45 4.9-4.79 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.73.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+            github.com/girishm77
+          </a>
+        </p>
+
+        <div class="repo-grid">
+          <a class="repo" href="https://github.com/girishm77/utd-marketing-productivity" target="_blank" rel="noopener">
+            <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><strong>utd-marketing-productivity</strong></div>
+            <p>Author productivity rankings — an interactive view of marketing research output based on UTD-style publication metrics.</p>
+            <div class="tags"><span>HTML</span><span>rankings</span><span>research metrics</span></div>
+          </a>
+          <a class="repo" href="https://github.com/girishm77/whatiftrade-site" target="_blank" rel="noopener">
+            <div class="rh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><strong>whatiftrade-site</strong></div>
+            <p>"What-if" trade scenario web app exploring counterfactual outcomes — a marketing–finance interface project.</p>
+            <div class="tags"><span>HTML</span><span>web app</span><span>finance</span></div>
+          </a>
+        </div>
+        <p style="margin-top:22px;color:var(--muted);font-size:.88rem;">Showing public repositories. New projects published to <a href="https://github.com/girishm77" target="_blank" rel="noopener">github.com/girishm77</a> will appear here.</p>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="page" id="page-contact">
+      <div class="inner">
+        <p class="eyebrow">Get in touch</p>
+        <h1 class="page-title">Contact</h1>
+        <p class="lead">I welcome inquiries from prospective doctoral students, collaborators, and journalists. For manuscripts in review or working-paper details, please email.</p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="M3 7l9 6 9-6"/></svg></div>
+            <div class="lbl">Office</div>
+            <div class="val">Hodge Hall (HH) 2100<br/>1309 E. 10th Street<br/>Bloomington, IN 47405</div>
+          </div>
+          <div class="contact-card">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></div>
+            <div class="lbl">Phone</div>
+            <div class="val">812-855-8878</div>
+          </div>
+          <div class="contact-card">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div>
+            <div class="lbl">University Profile</div>
+            <div class="val"><a href="https://kelley.iu.edu/faculty-research/faculty-directory/profile.html?id=gmallapr" target="_blank" rel="noopener">Kelley Faculty Directory ↗</a></div>
+          </div>
+          <div class="contact-card">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14v7"/></svg></div>
+            <div class="lbl">Scholarship</div>
+            <div class="val"><a href="https://scholar.google.com/citations?user=QbqzVxUAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar ↗</a></div>
+          </div>
+        </div>
+
+        <p style="margin-top:30px;color:var(--muted);font-size:.9rem;">Department of Marketing · Kelley School of Business · Indiana University, Bloomington</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ---- SPA-style nav ----
+  var navLinks = document.querySelectorAll('#nav a');
+  var pages = document.querySelectorAll('.page');
+  function show(id){
+    pages.forEach(function(p){ p.classList.toggle('active', p.id === 'page-' + id); });
+    navLinks.forEach(function(a){ a.classList.toggle('active', a.dataset.page === id); });
+    window.scrollTo({top:0,behavior:'instant' in window ? 'instant' : 'auto'});
+    if (history.replaceState) history.replaceState(null,'','#'+id);
+  }
+  navLinks.forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); show(a.dataset.page); });
+  });
+  // open hash on load
+  var initial = (location.hash || '#home').replace('#','');
+  if (document.getElementById('page-' + initial)) show(initial);
+</script>
+</body>
+</html>
