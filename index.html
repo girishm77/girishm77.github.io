@@ -143,10 +143,18 @@
 
   .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px;}
   .pill{
+    display:inline-flex;align-items:center;justify-content:center;
     background:var(--cream);color:var(--crimson-dark);
     border:1px solid var(--line);border-radius:999px;
     padding:6px 14px;font-size:.82rem;font-weight:600;
   }
+  button.pill{
+    font:inherit;line-height:1.35;cursor:pointer;
+    transition:background .15s,border-color .15s,color .15s,box-shadow .15s,transform .15s;
+  }
+  button.pill:hover{background:#fff;border-color:rgba(153,0,0,.38);box-shadow:0 4px 12px rgba(153,0,0,.08);transform:translateY(-1px);}
+  button.pill:focus-visible{outline:3px solid rgba(153,0,0,.24);outline-offset:2px;}
+  button.pill.is-active{background:var(--crimson);border-color:var(--crimson);color:#fff;box-shadow:0 5px 14px rgba(153,0,0,.18);}
   .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0 8px;}
   .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 16px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.03);}
   .stat .n{font-family:'Source Serif 4',serif;font-size:1.9rem;font-weight:700;color:var(--crimson);line-height:1;}
@@ -169,6 +177,8 @@
   ol.pubs .ptitle{font-weight:600;color:var(--ink);}
   ol.pubs .pvenue{color:var(--crimson-dark);font-style:italic;}
   ol.pubs .pmeta{color:var(--muted);font-size:.92rem;}
+  .pub-filter-status{color:var(--muted);font-size:.9rem;margin:-4px 0 8px;}
+  .pub-hidden{display:none;}
   .badge{
     display:inline-block;background:#fff3cd;color:#7a5b00;
     border:1px solid #f0e0a8;border-radius:5px;
@@ -322,13 +332,13 @@
 
         <p>My work brings digital-trace data, network analysis, and modern econometrics to substantive questions in marketing strategy — from open-source and crowdfunding communities to political communication, salesperson networks, and firm governance. It has appeared in the <em>Journal of Marketing</em>, <em>Marketing Science</em>, <em>Journal of Marketing Research</em>, <em>Management Science</em>, and the <em>Journal of the Academy of Marketing Science</em>.</p>
 
-        <div class="pill-row">
-          <span class="pill">Innovation</span>
-          <span class="pill">Social Media</span>
-          <span class="pill">Networks</span>
-          <span class="pill">Marketing Channels</span>
-          <span class="pill">Marketing Strategy</span>
-          <span class="pill">NLP &amp; Text Analysis</span>
+        <div class="pill-row" aria-label="Research area filters">
+          <button class="pill filter-pill" type="button" data-filter="innovation" aria-pressed="false">Innovation</button>
+          <button class="pill filter-pill" type="button" data-filter="social-media" aria-pressed="false">Social Media</button>
+          <button class="pill filter-pill" type="button" data-filter="networks" aria-pressed="false">Networks</button>
+          <button class="pill filter-pill" type="button" data-filter="marketing-channels" aria-pressed="false">Marketing Channels</button>
+          <button class="pill filter-pill" type="button" data-filter="marketing-strategy" aria-pressed="false">Marketing Strategy</button>
+          <button class="pill filter-pill" type="button" data-filter="text-analysis" aria-pressed="false">NLP &amp; Text Analysis</button>
         </div>
 
         <div class="stat-grid">
@@ -357,35 +367,37 @@
         <p class="lead">I study innovation, social media, marketing channels, and marketing strategy — often using network structure, digital-trace data, and text as a window into how firms and communities create and capture value.</p>
 
         <h3 class="sub">Research interests</h3>
-        <div class="pill-row">
-          <span class="pill">Open &amp; user innovation</span>
-          <span class="pill">Social &amp; network structure</span>
-          <span class="pill">Crowdfunding</span>
-          <span class="pill">Political communication &amp; text</span>
-          <span class="pill">Inter-firm relationships &amp; governance</span>
-          <span class="pill">Salesperson networks</span>
-          <span class="pill">New product development</span>
+        <div class="pill-row" aria-label="Research interest filters">
+          <button class="pill filter-pill is-active" type="button" data-filter="all" aria-pressed="true">All publications</button>
+          <button class="pill filter-pill" type="button" data-filter="open-user-innovation" aria-pressed="false">Open &amp; user innovation</button>
+          <button class="pill filter-pill" type="button" data-filter="networks" aria-pressed="false">Social &amp; network structure</button>
+          <button class="pill filter-pill" type="button" data-filter="crowdfunding" aria-pressed="false">Crowdfunding</button>
+          <button class="pill filter-pill" type="button" data-filter="political-text" aria-pressed="false">Political communication &amp; text</button>
+          <button class="pill filter-pill" type="button" data-filter="interfirm-governance" aria-pressed="false">Inter-firm relationships &amp; governance</button>
+          <button class="pill filter-pill" type="button" data-filter="salesperson-networks" aria-pressed="false">Salesperson networks</button>
+          <button class="pill filter-pill" type="button" data-filter="new-product-development" aria-pressed="false">New product development</button>
         </div>
 
-        <h2 class="sec">Selected &amp; Recent Publications</h2>
+        <h2 class="sec" id="selected-publications">Selected &amp; Recent Publications</h2>
+        <p class="pub-filter-status" id="pub-filter-status" aria-live="polite">Showing all selected and recent publications.</p>
         <ol class="pubs">
-          <li><span class="ptitle">Dynamics of New Product Announcements and IPO Performance.</span> Mah, S., Slotegraaf, R., &amp; Mallapragada, G. <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">forthcoming.</span></li>
-          <li><span class="ptitle">To Acquire or To Ally? The Impact of Strategic Emphasis on Governance Mode Choice.</span> Mallapragada, G., Bommaraju, R., Kumar, A., &amp; Pedada, K. (2025). <span class="pvenue">Journal of Marketing Research</span>, <span class="pmeta">62(4), 645–663.</span></li>
-          <li><span class="ptitle">Navigating Geopolitical Turmoil: Corporate Responses to the Ukraine War and Its Impact on Consumer Mindset.</span> Ganesan, S. &amp; Mallapragada, G. (2024). <span class="pvenue">Journal of Public Policy &amp; Marketing</span>, <span class="pmeta">44(1), 122–139.</span></li>
-          <li><span class="ptitle">Navigating Open Innovation.</span> Slotegraaf, R. &amp; Mallapragada, G. (2023). <span class="pvenue">PDMA Handbook of New Product Development</span>, <span class="pmeta">4th ed., 299–314.</span></li>
-          <li><span class="ptitle">Does Connectivity Among Backers Help or Hurt Crowdfunding Success of New Ideas?</span> Herd, K., Mallapragada, G., &amp; Narayan, V. (2022). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">86(5), 117–134.</span></li>
-          <li><span class="ptitle">The Impact of Social Capital and Transaction Efficacy on Salesperson Performance.</span> Mallapragada, G., Gupta, A., &amp; Josephson, B. (2022). <span class="pvenue">Production and Operations Management</span>, <span class="pmeta">31(9), 3525–3542.</span></li>
-          <li><span class="ptitle">Interfirm Collaboration and Exchange Relationships: A Research Agenda for Future Research.</span> Borah, S., Mallapragada, G., Bommaraju, R., Venkatesan, R., &amp; Thongpapanl, T. (2022). <span class="pvenue">International Journal of Research in Marketing</span>, <span class="pmeta">39(2), 603–618.</span></li>
-          <li><span class="ptitle">Impact of Political Television Advertisements on Viewers' Response to Subsequent Advertisements.</span> Fossen, B., Mallapragada, G., &amp; De, A. (2021). <span class="pvenue">Marketing Science</span>, <span class="pmeta">40(2), 305–324.</span></li>
-          <li><span class="ptitle">Board Interlocks and New Product Introductions.</span> Srinivasan, R., Wuyts, S., &amp; Mallapragada, G. (2018). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">82(1), 132–148.</span></li>
-          <li><span class="ptitle">Innovativeness as an Unintended Outcome of Franchising: Insights from Restaurant Chains.</span> Mallapragada, G. &amp; Srinivasan, R. (2017). <span class="pvenue">Decision Sciences</span>, <span class="pmeta">48(6), 1164–1197.</span></li>
-          <li><span class="ptitle">Exploring the Effects of What (Product) and Where (Website) Characteristics on Online Shopping Behavior.</span> Mallapragada, G., Chandukala, S., &amp; Liu, Q. (2016). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">80(2), 21–38.</span></li>
-          <li><span class="ptitle">Peer Review and Research Impact.</span> Mallapragada, G., Lahiri, N., &amp; Nerkar, A. (2016). <span class="pvenue">Customer Needs and Solutions</span>, <span class="pmeta">3(1), 29–41.</span></li>
-          <li><span class="ptitle">Virtual Interfirm Relationships: Examining Heterogeneity in the Effects of Dependence Structures on Relational Outcomes.</span> Mallapragada, G., Grewal, R., Mehta, R., &amp; Dharwadkar, R. (2015). <span class="pvenue">Journal of the Academy of Marketing Science</span>, <span class="pmeta">43(5), 610–628.</span><span class="badge">Best Paper Finalist</span></li>
-          <li><span class="ptitle">Efficacy of Channel Control Mechanisms in Foreign Markets.</span> Grewal, R., Kumar, A., Mallapragada, G., &amp; Saini, A. (2013). <span class="pvenue">Journal of Marketing Research</span>, <span class="pmeta">50(3), 378–398.</span></li>
-          <li><span class="ptitle">Environments, Unobserved Heterogeneity, and the Effect of Market Orientation on Outcomes for High-Tech Firms.</span> Grewal, R., Chandrashekaran, M., Johnson, J. L., &amp; Mallapragada, G. (2013). <span class="pvenue">Journal of the Academy of Marketing Science</span>, <span class="pmeta">41(2), 206–233.</span></li>
-          <li><span class="ptitle">User-Generated Open Source Products: Founder's Social Capital and Time-to-Market.</span> Mallapragada, G., Grewal, R., &amp; Lilien, G. (2012). <span class="pvenue">Marketing Science</span>, <span class="pmeta">31(3), 474–492.</span></li>
-          <li><span class="ptitle">Location, Location, Location: How Network Embeddedness Affects Project Success in Open Source Systems.</span> Grewal, R., Lilien, G., &amp; Mallapragada, G. (2006). <span class="pvenue">Management Science</span>, <span class="pmeta">52(7), 1043–1056.</span></li>
+          <li data-topics="innovation new-product-development marketing-strategy"><span class="ptitle">Dynamics of New Product Announcements and IPO Performance.</span> Mah, S., Slotegraaf, R., &amp; Mallapragada, G. <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">forthcoming.</span></li>
+          <li data-topics="interfirm-governance marketing-strategy marketing-channels"><span class="ptitle">To Acquire or To Ally? The Impact of Strategic Emphasis on Governance Mode Choice.</span> Mallapragada, G., Bommaraju, R., Kumar, A., &amp; Pedada, K. (2025). <span class="pvenue">Journal of Marketing Research</span>, <span class="pmeta">62(4), 645–663.</span></li>
+          <li data-topics="marketing-strategy social-media text-analysis"><span class="ptitle">Navigating Geopolitical Turmoil: Corporate Responses to the Ukraine War and Its Impact on Consumer Mindset.</span> Ganesan, S. &amp; Mallapragada, G. (2024). <span class="pvenue">Journal of Public Policy &amp; Marketing</span>, <span class="pmeta">44(1), 122–139.</span></li>
+          <li data-topics="innovation open-user-innovation new-product-development"><span class="ptitle">Navigating Open Innovation.</span> Slotegraaf, R. &amp; Mallapragada, G. (2023). <span class="pvenue">PDMA Handbook of New Product Development</span>, <span class="pmeta">4th ed., 299–314.</span></li>
+          <li data-topics="crowdfunding networks innovation social-media text-analysis marketing-strategy"><span class="ptitle">Does Connectivity Among Backers Help or Hurt Crowdfunding Success of New Ideas?</span> Herd, K., Mallapragada, G., &amp; Narayan, V. (2022). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">86(5), 117–134.</span></li>
+          <li data-topics="salesperson-networks networks marketing-strategy"><span class="ptitle">The Impact of Social Capital and Transaction Efficacy on Salesperson Performance.</span> Mallapragada, G., Gupta, A., &amp; Josephson, B. (2022). <span class="pvenue">Production and Operations Management</span>, <span class="pmeta">31(9), 3525–3542.</span></li>
+          <li data-topics="interfirm-governance marketing-channels marketing-strategy"><span class="ptitle">Interfirm Collaboration and Exchange Relationships: A Research Agenda for Future Research.</span> Borah, S., Mallapragada, G., Bommaraju, R., Venkatesan, R., &amp; Thongpapanl, T. (2022). <span class="pvenue">International Journal of Research in Marketing</span>, <span class="pmeta">39(2), 603–618.</span></li>
+          <li data-topics="political-text marketing-strategy social-media text-analysis"><span class="ptitle">Impact of Political Television Advertisements on Viewers' Response to Subsequent Advertisements.</span> Fossen, B., Mallapragada, G., &amp; De, A. (2021). <span class="pvenue">Marketing Science</span>, <span class="pmeta">40(2), 305–324.</span></li>
+          <li data-topics="innovation new-product-development networks marketing-strategy"><span class="ptitle">Board Interlocks and New Product Introductions.</span> Srinivasan, R., Wuyts, S., &amp; Mallapragada, G. (2018). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">82(1), 132–148.</span></li>
+          <li data-topics="innovation marketing-channels marketing-strategy"><span class="ptitle">Innovativeness as an Unintended Outcome of Franchising: Insights from Restaurant Chains.</span> Mallapragada, G. &amp; Srinivasan, R. (2017). <span class="pvenue">Decision Sciences</span>, <span class="pmeta">48(6), 1164–1197.</span></li>
+          <li data-topics="marketing-strategy marketing-channels social-media"><span class="ptitle">Exploring the Effects of What (Product) and Where (Website) Characteristics on Online Shopping Behavior.</span> Mallapragada, G., Chandukala, S., &amp; Liu, Q. (2016). <span class="pvenue">Journal of Marketing</span>, <span class="pmeta">80(2), 21–38.</span></li>
+          <li data-topics="marketing-strategy networks"><span class="ptitle">Peer Review and Research Impact.</span> Mallapragada, G., Lahiri, N., &amp; Nerkar, A. (2016). <span class="pvenue">Customer Needs and Solutions</span>, <span class="pmeta">3(1), 29–41.</span></li>
+          <li data-topics="interfirm-governance marketing-channels networks marketing-strategy"><span class="ptitle">Virtual Interfirm Relationships: Examining Heterogeneity in the Effects of Dependence Structures on Relational Outcomes.</span> Mallapragada, G., Grewal, R., Mehta, R., &amp; Dharwadkar, R. (2015). <span class="pvenue">Journal of the Academy of Marketing Science</span>, <span class="pmeta">43(5), 610–628.</span><span class="badge">Best Paper Finalist</span></li>
+          <li data-topics="marketing-channels interfirm-governance marketing-strategy"><span class="ptitle">Efficacy of Channel Control Mechanisms in Foreign Markets.</span> Grewal, R., Kumar, A., Mallapragada, G., &amp; Saini, A. (2013). <span class="pvenue">Journal of Marketing Research</span>, <span class="pmeta">50(3), 378–398.</span></li>
+          <li data-topics="marketing-strategy innovation new-product-development"><span class="ptitle">Environments, Unobserved Heterogeneity, and the Effect of Market Orientation on Outcomes for High-Tech Firms.</span> Grewal, R., Chandrashekaran, M., Johnson, J. L., &amp; Mallapragada, G. (2013). <span class="pvenue">Journal of the Academy of Marketing Science</span>, <span class="pmeta">41(2), 206–233.</span></li>
+          <li data-topics="open-user-innovation innovation networks new-product-development social-media"><span class="ptitle">User-Generated Open Source Products: Founder's Social Capital and Time-to-Market.</span> Mallapragada, G., Grewal, R., &amp; Lilien, G. (2012). <span class="pvenue">Marketing Science</span>, <span class="pmeta">31(3), 474–492.</span></li>
+          <li data-topics="open-user-innovation innovation networks social-media"><span class="ptitle">Location, Location, Location: How Network Embeddedness Affects Project Success in Open Source Systems.</span> Grewal, R., Lilien, G., &amp; Mallapragada, G. (2006). <span class="pvenue">Management Science</span>, <span class="pmeta">52(7), 1043–1056.</span></li>
         </ol>
 
         <h2 class="sec">Working Papers &amp; Active Projects</h2>
@@ -406,7 +418,6 @@
         <div class="card-grid">
           <div class="card"><div class="lvl">Doctoral</div><h4>Seminar on Research Design</h4><p>School-wide course on framing, identification, and the craft of empirical research.</p></div>
           <div class="card"><div class="lvl">Doctoral</div><h4>Seminar on Marketing Strategy</h4><p>Theory and empirics at the marketing–strategy interface.</p></div>
-          <div class="card"><div class="lvl">Doctoral</div><h4>Research Methods in Marketing</h4><p>Methods seminar spanning econometrics, networks, and text.</p></div>
         </div>
 
         <h2 class="sec">MBA &amp; Executive</h2>
@@ -572,18 +583,85 @@
   // ---- SPA-style nav ----
   var navLinks = document.querySelectorAll('#nav a');
   var pages = document.querySelectorAll('.page');
-  function show(id){
+  var filterButtons = document.querySelectorAll('[data-filter]');
+  var publications = document.querySelectorAll('ol.pubs li[data-topics]');
+  var pubFilterStatus = document.getElementById('pub-filter-status');
+  var pubHeading = document.getElementById('selected-publications');
+  var filterLabels = {
+    all: 'all selected and recent publications',
+    innovation: 'Innovation',
+    'social-media': 'Social Media',
+    networks: 'Networks',
+    'marketing-channels': 'Marketing Channels',
+    'marketing-strategy': 'Marketing Strategy',
+    'text-analysis': 'NLP and Text Analysis',
+    'open-user-innovation': 'Open and user innovation',
+    crowdfunding: 'Crowdfunding',
+    'political-text': 'Political communication and text',
+    'interfirm-governance': 'Inter-firm relationships and governance',
+    'salesperson-networks': 'Salesperson networks',
+    'new-product-development': 'New product development'
+  };
+
+  function show(id, options){
+    options = options || {};
     pages.forEach(function(p){ p.classList.toggle('active', p.id === 'page-' + id); });
     navLinks.forEach(function(a){ a.classList.toggle('active', a.dataset.page === id); });
-    window.scrollTo({top:0,behavior:'instant' in window ? 'instant' : 'auto'});
+    if (!options.preserveScroll) window.scrollTo({top:0,behavior:'auto'});
     if (history.replaceState) history.replaceState(null,'','#'+id);
   }
+
+  function hasTopic(publication, filter){
+    return (publication.dataset.topics || '').split(/\s+/).indexOf(filter) !== -1;
+  }
+
+  function setPublicationFilter(filter, options){
+    var activeFilter = filter || 'all';
+    var visibleCount = 0;
+    options = options || {};
+
+    publications.forEach(function(publication){
+      var isVisible = activeFilter === 'all' || hasTopic(publication, activeFilter);
+      publication.classList.toggle('pub-hidden', !isVisible);
+      if (isVisible) visibleCount += 1;
+    });
+
+    filterButtons.forEach(function(button){
+      var isActive = button.dataset.filter === activeFilter;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    if (pubFilterStatus) {
+      if (activeFilter === 'all') {
+        pubFilterStatus.textContent = 'Showing all ' + publications.length + ' selected and recent publications.';
+      } else {
+        pubFilterStatus.textContent = 'Showing ' + visibleCount + ' ' + (visibleCount === 1 ? 'publication' : 'publications') + ' in ' + (filterLabels[activeFilter] || activeFilter) + '.';
+      }
+    }
+
+    if (options.navigate) {
+      show('research', {preserveScroll:true});
+      if (pubHeading) {
+        requestAnimationFrame(function(){
+          pubHeading.scrollIntoView({behavior:'smooth',block:'start'});
+        });
+      }
+    }
+  }
+
   navLinks.forEach(function(a){
     a.addEventListener('click', function(e){ e.preventDefault(); show(a.dataset.page); });
+  });
+  filterButtons.forEach(function(button){
+    button.addEventListener('click', function(){
+      setPublicationFilter(button.dataset.filter, {navigate:true});
+    });
   });
   // open hash on load
   var initial = (location.hash || '#home').replace('#','');
   if (document.getElementById('page-' + initial)) show(initial);
+  setPublicationFilter('all');
 </script>
 </body>
 </html>
